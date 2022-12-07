@@ -1,4 +1,5 @@
-import { GetServerSideProps } from "next";
+import { gql } from "graphql-request";
+import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import * as React from "react";
 import client from "../../config/client";
@@ -40,12 +41,29 @@ export default function AppPage({ data }: Props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<Props, Params> = async ({ params }) => {
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
+  const { apps } = await client.request<{ apps: { slug: string }[] }>(gql`
+    query AppSlugs {
+      apps {
+        slug
+      }
+    }
+  `);
+
+  const paths = apps.map(({ slug }) => ({ params: { slug } }));
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) => {
   const { slug } = Object.assign({ slug: "" }, params);
 
-  const response = await client.request<{ app: IApp | null }, Params>(GetAppDocument, { slug });
+  const { app } = await client.request<{ app: IApp | null }, Params>(GetAppDocument, { slug });
 
-  if (!response.app) return { notFound: true };
+  if (!app) return { notFound: true };
 
-  return { props: { data: response.app } };
+  return { props: { data: app } };
 };
