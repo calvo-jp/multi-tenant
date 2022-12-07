@@ -11,9 +11,9 @@ type Props = {
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const { apps: data } = await client.request<{ apps: IApp[] }>(GetAppsDocument);
+  const { apps } = await client.request<{ apps: IApp[] }>(GetAppsDocument);
 
-  return { props: { data } };
+  return { props: { data: apps } };
 };
 
 export default function AppsPage({ data }: Props) {
