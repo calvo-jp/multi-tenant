@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import * as React from "react";
 import client from "../../config/client";
 import { GetAppsDocument } from "../../graphql/queries";
 import styles from "../../styles/home.module.css";
