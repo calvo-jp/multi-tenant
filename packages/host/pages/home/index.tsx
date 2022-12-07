@@ -48,7 +48,7 @@ export default function AppsPage({ data }: Props) {
 
                 <a href={`http://${slug}.localhost:3000`} target="_blank" rel="noreferrer">
                   Go to website
-                  <ArrowNarrowRight />
+                  <ArrowNarrowRightSolidIcon />
                 </a>
               </li>
             ))}
@@ -59,7 +59,7 @@ export default function AppsPage({ data }: Props) {
   );
 }
 
-function ArrowNarrowRight(props: React.ComponentProps<"svg">) {
+function ArrowNarrowRightSolidIcon(props: React.ComponentProps<"svg">) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
       <path
