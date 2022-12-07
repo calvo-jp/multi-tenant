@@ -13,16 +13,6 @@ type Params = {
   slug: string;
 };
 
-export const getServerSideProps: GetServerSideProps<Props, Params> = async ({ params }) => {
-  const { slug } = Object.assign({ slug: "" }, params);
-
-  const response = await client.request<{ app: IApp | null }, Params>(GetAppDocument, { slug });
-
-  if (!response.app) return { notFound: true };
-
-  return { props: { data: response.app } };
-};
-
 export default function AppPage({ data }: Props) {
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -49,3 +39,13 @@ export default function AppPage({ data }: Props) {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps<Props, Params> = async ({ params }) => {
+  const { slug } = Object.assign({ slug: "" }, params);
+
+  const response = await client.request<{ app: IApp | null }, Params>(GetAppDocument, { slug });
+
+  if (!response.app) return { notFound: true };
+
+  return { props: { data: response.app } };
+};
