@@ -16,11 +16,11 @@ type Params = {
 export const getServerSideProps: GetServerSideProps<Props, Params> = async ({ params }) => {
   const { slug } = Object.assign({ slug: "" }, params);
 
-  const { app: data } = await client.request<{ app: IApp }, Params>(GetAppDocument, { slug });
+  const response = await client.request<{ app: IApp | null }, Params>(GetAppDocument, { slug });
 
-  if (!data) return { notFound: true };
+  if (!response.app) return { notFound: true };
 
-  return { props: { data } };
+  return { props: { data: response.app } };
 };
 
 export default function AppPage({ data }: Props) {
