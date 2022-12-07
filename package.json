@@ -1,5 +1,9 @@
 {
   "name": "multi-tenant",
+  "author": {
+    "name": "Calvo JP",
+    "email": "calvojp92@gmail.com"
+  },
   "private": true,
   "workspaces": [
     "packages/*"
