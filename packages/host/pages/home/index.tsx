@@ -46,7 +46,7 @@ export default function AppsPage({ data }: Props) {
                 <h2>{name}</h2>
                 <p>{description}</p>
 
-                <a href={`http://${slug}.localhost:4200`} target="_blank" rel="noreferrer">
+                <a href={`http://${slug}.localhost:3000`} target="_blank" rel="noreferrer">
                   Go to website
                   <ArrowNarrowRight />
                 </a>
