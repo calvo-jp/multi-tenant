@@ -8,6 +8,17 @@ const prod = mode === "production";
 
 /** @type {import("webpack").Configuration} */
 module.exports = {
+  mode,
+  devtool: "source-map",
+  devServer: {
+    static: path.join(__dirname, "public"),
+    compress: true,
+    port: 3001,
+    hot: true,
+  },
+  optimization: {
+    runtimeChunk: false,
+  },
   entry: {
     "build/bundle": ["./src/main.ts"],
   },
@@ -19,7 +30,7 @@ module.exports = {
     mainFields: ["svelte", "browser", "module", "main"],
   },
   output: {
-    path: path.join(__dirname, "/public"),
+    path: path.join(__dirname, "public"),
     filename: "[name].js",
     chunkFilename: "[name].[id].js",
   },
@@ -55,7 +66,6 @@ module.exports = {
       },
     ],
   },
-  mode,
   plugins: [
     new MiniCssExtractPlugin({
       filename: "[name].css",
@@ -70,11 +80,4 @@ module.exports = {
       shared: {},
     }),
   ],
-  devtool: prod ? false : "source-map",
-  devServer: {
-    hot: true,
-  },
-  optimization: {
-    runtimeChunk: false,
-  },
 };
