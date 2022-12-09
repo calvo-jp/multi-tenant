@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const webpack = require("webpack");
 const sveltePreprocess = require("svelte-preprocess");
@@ -11,28 +12,27 @@ module.exports = {
   mode,
   devtool: "source-map",
   devServer: {
-    static: path.join(__dirname, "public"),
-    compress: true,
-    port: 3001,
     hot: true,
+    port: 3001,
+    static: "./dist",
+    compress: true,
   },
   optimization: {
     runtimeChunk: false,
   },
-  entry: {
-    "build/bundle": ["./src/main.ts"],
-  },
+  entry: "./src/index.ts",
   resolve: {
     alias: {
       svelte: path.dirname(require.resolve("svelte/package.json")),
     },
     extensions: [".mjs", ".js", ".ts", ".svelte"],
-    mainFields: ["svelte", "browser", "module", "main"],
   },
   output: {
-    path: path.join(__dirname, "public"),
-    filename: "[name].js",
-    chunkFilename: "[name].[id].js",
+    path: path.join(__dirname, "dist"),
+    filename: "[name].[contenthash].js",
+    uniqueName: "remote",
+    publicPath: "auto",
+    clean: true,
   },
   module: {
     rules: [
@@ -68,7 +68,11 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].css",
+      filename: "[name].[contenthash].css",
+    }),
+    new HtmlWebpackPlugin({
+      minify: true,
+      template: path.join(__dirname, "src/index.html"),
     }),
     new webpack.container.ModuleFederationPlugin({
       name: "remote",
