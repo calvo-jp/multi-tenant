@@ -4,6 +4,7 @@ import Badge from "components/badge";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import IPost from "types/post";
 import IUser from "types/user";
 import mockPost from "utils/mock-post";
@@ -79,13 +80,13 @@ function Posts({ data }: { data: IPost[] }) {
 
       <div className="mt-4 grid grid-cols-2 gap-8">
         {data.map(({ id, slug, title, cover, author }) => (
-          <a key={id} href={`http://${author.username}.localhost:5000/${slug}`} className="block">
+          <Link key={id} href={`/${slug}`} className="block">
             <div className="aspect-w-16 aspect-h-9">
               <Image src={cover} alt="" width={600} height={600} />
             </div>
 
             <h2 className="mt-1 text-lg text-neutral-800 line-clamp-1">{title}</h2>
-          </a>
+          </Link>
         ))}
       </div>
     </div>

@@ -1,6 +1,8 @@
 import { faker } from "@faker-js/faker";
 import fs from "fs";
 import path from "path";
+import { remark } from "remark";
+import html from "remark-html";
 import IPost from "types/post";
 import mockUser from "./mock-user";
 import slugify from "./slugify";
@@ -17,9 +19,12 @@ export default function mockPost(overrides: Partial<IPost> = {}): IPost {
     }),
   );
   const slug = slugify(title);
-  const body = markdown;
   const author = mockUser();
   const cover = faker.helpers.arrayElement(images);
+  const body = {
+    markdown,
+    html: remark().use(html, { sanitize: false }).processSync(markdown).toString(),
+  };
 
   return {
     id,

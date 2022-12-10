@@ -1,13 +1,12 @@
+import { ArrowLongLeftIcon } from "@heroicons/react/24/solid";
 import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
+import Image from "next/image";
+import Link from "next/link";
 import IPost from "types/post";
-import IUser from "types/user";
 import mockPost from "utils/mock-post";
-import mockUser from "utils/mock-user";
 
 type Props = {
-  author: IUser;
-  post: IPost;
+  data: IPost;
 };
 
 type Params = {
@@ -19,20 +18,37 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async ({ pa
   /* 💡 access author and slug */
   console.log(params);
 
-  const author = mockUser();
-  const post = mockPost({ author });
+  const data = mockPost();
 
-  return { props: { author, post } };
+  return { props: { data } };
 };
 
-export default function Posts() {
-  const router = useRouter();
-
+export default function Posts({ data }: Props) {
   return (
-    <div className="p-4">
-      <pre>
-        <code>{JSON.stringify(router.query, null, 2)}</code>
-      </pre>
-    </div>
+    <>
+      <header className="py-4 px-6">
+        <Link
+          href="/"
+          className="flex w-fit items-center gap-2 transition-colors duration-300 hover:text-sky-700"
+        >
+          <ArrowLongLeftIcon className="h-5 w-5" />
+          Go back
+        </Link>
+      </header>
+      <main className="p-16">
+        <div className="mx-auto max-w-[690px]">
+          <h1 className="text-center font-serif text-4xl font-bold">{data.title}</h1>
+          <div className="aspect-w-16 aspect-h-9 mt-12">
+            <Image src={data.cover} alt="" width={1000} height={600} />
+          </div>
+          <div
+            className="markdown markdown-neutral mt-12 max-w-[unset] markdown-headings:font-serif markdown-h1:max-w-[unset] markdown-code:text-neutral-800 markdown-pre:bg-neutral-200 lg:markdown-lg"
+            dangerouslySetInnerHTML={{
+              __html: data.body.html,
+            }}
+          />
+        </div>
+      </main>
+    </>
   );
 }

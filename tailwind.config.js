@@ -8,6 +8,7 @@ module.exports = {
       fontFamily: {
         sans: ["'Source Sans Pro'", ...defaultTheme.fontFamily.sans],
         serif: ["'Source Serif Pro'", ...defaultTheme.fontFamily.serif],
+        mono: ["'Fira Code'", ...defaultTheme.fontFamily.mono],
       },
     },
   },
@@ -15,8 +16,10 @@ module.exports = {
     aspectRatio: false,
   },
   plugins: [
-    require("@tailwindcss/typography"),
     require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/line-clamp"),
+    require("@tailwindcss/typography")({
+      className: "markdown",
+    }),
   ],
 };
