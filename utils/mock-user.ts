@@ -6,7 +6,7 @@ export default function mockUser(overrides: Partial<IUser> = {}): IUser {
   const name = faker.name.fullName();
   const email = faker.internet.email();
   const username = faker.internet.userName();
-  const avatar = `https://i.pravatar.cc/300?u=${id}`;
+  const avatar = `https://i.pravatar.cc/400?u=${id}`;
 
   return {
     id,

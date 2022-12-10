@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import Badge from "components/badge";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -36,9 +37,7 @@ export default function Index({ data }: Props) {
               Authors
             </h1>
 
-            <div className="rounded-lg bg-purple-200 py-[2px] px-[4px] text-xs font-semibold leading-[1.15] text-purple-800">
-              {data.length}
-            </div>
+            <Badge>{data.length}</Badge>
           </div>
 
           <div className="mt-6">

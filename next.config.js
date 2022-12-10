@@ -1,14 +1,12 @@
 // @ts-check
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   reactStrictMode: true,
   swcMinify: true,
   trailingSlash: true,
   productionBrowserSourceMaps: true,
   images: {
-    domains: ["i.pravatar.cc"],
+    domains: ["i.pravatar.cc", "images.pexels.com"],
   },
 };
-
-module.exports = nextConfig;
