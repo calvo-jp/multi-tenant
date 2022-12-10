@@ -47,7 +47,7 @@ export default function Profile({ posts, author }: Props) {
   return (
     <>
       <Head>
-        <title>{author.name}&rsquo;s Blog</title>
+        <title>{`${author.name}&rsquo;s Blog`}</title>
       </Head>
 
       <header className="py-4 px-6">
