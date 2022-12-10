@@ -14,8 +14,16 @@ type Props = {
   posts: IPost[];
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
+type Params = {
+  author: string;
+};
+
+export const getServerSideProps: GetServerSideProps<Props, Params> = async ({ params }) => {
+  /* 💡 access author */
+  console.log(params);
+
   const author = mockUser();
+
   const posts = new Array(
     faker.datatype.number({
       min: 2,
