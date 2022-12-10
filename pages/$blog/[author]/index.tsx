@@ -60,7 +60,7 @@ export default function Profile({ posts, author }: Props) {
         </a>
       </header>
 
-      <main className="p-16">
+      <main className="p-8 lg:p-16">
         <div className="mx-auto max-w-[690px]">
           <Author data={author} />
           <Posts data={posts} />
@@ -78,7 +78,7 @@ function Posts({ data }: { data: IPost[] }) {
         <Badge>{data.length}</Badge>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-8">
+      <div className="mt-4 grid grid-cols-1 gap-8 lg:grid-cols-2">
         {data.map(({ id, slug, title, cover, author }) => (
           <Link key={id} href={`/${slug}`} className="block">
             <div className="aspect-w-16 aspect-h-9">

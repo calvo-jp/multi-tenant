@@ -30,7 +30,7 @@ export default function Index({ data }: Props) {
         <title>Hello, World! 🎉🥳</title>
       </Head>
 
-      <main className="p-16">
+      <main className="p-8 lg:p-16">
         <div className="mx-auto max-w-[690px]">
           <div className="flex items-center gap-2">
             <h1 className="font-serif text-3xl font-bold tracking-[0.025em] text-neutral-800">
