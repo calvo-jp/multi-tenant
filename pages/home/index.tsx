@@ -12,8 +12,8 @@ type Props = {
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const data = new Array(
     faker.datatype.number({
-      min: 5,
-      max: 10,
+      min: 4,
+      max: 8,
     }),
   )
     .fill(null)
@@ -43,7 +43,7 @@ export default function Index({ data }: Props) {
 
           <div className="mt-6">
             <ul className="flex flex-col gap-2">
-              {data.map(({ id, name, email, username }) => {
+              {data.map(({ id, name, email, username, avatar }) => {
                 return (
                   <li key={id}>
                     <a
@@ -51,13 +51,7 @@ export default function Index({ data }: Props) {
                       className="flex items-center gap-4 rounded-md border border-neutral-200 p-4 outline-none transition-colors duration-300 hover:border-neutral-300 focus:border-sky-200"
                     >
                       <div className="overflow-hidden rounded-full">
-                        <Image
-                          src={`https://i.pravatar.cc/300?u=${id}`}
-                          width={48}
-                          height={48}
-                          alt=""
-                          draggable={false}
-                        />
+                        <Image src={avatar} width={48} height={48} alt="" draggable={false} />
                       </div>
 
                       <div>
