@@ -1,8 +1,10 @@
 import { faker } from "@faker-js/faker";
+import { ArrowLongRightIcon } from "@heroicons/react/24/solid";
 import Badge from "components/badge";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import IUser from "types/user";
 import mockUser from "utils/mock-user";
 
@@ -32,12 +34,21 @@ export default function Index({ data }: Props) {
 
       <main className="p-8 lg:p-16">
         <div className="mx-auto max-w-[690px]">
-          <div className="flex items-center gap-2">
-            <h1 className="font-serif text-3xl font-bold tracking-[0.025em] text-neutral-800">
-              Authors
-            </h1>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <h1 className="font-serif text-3xl font-bold tracking-[0.025em] text-neutral-800">
+                Authors
+              </h1>
 
-            <Badge>{data.length}</Badge>
+              <Badge>{data.length}</Badge>
+            </div>
+
+            <Link
+              href="/login"
+              className="flex w-fit items-center gap-2 transition-colors duration-300 hover:text-sky-700"
+            >
+              Login <ArrowLongRightIcon className="h-5 w-5" />
+            </Link>
           </div>
 
           <div className="mt-6">
