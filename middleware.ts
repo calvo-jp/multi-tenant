@@ -6,15 +6,15 @@ export const config = {
 
 export function middleware(req: NextRequest) {
   const url = req.nextUrl;
-  const hostname = req.headers.get("host") ?? "localhost:3000";
+  const hostname = req.headers.get("host") ?? "localhost:5000";
 
-  if (hostname === "localhost:3000") {
+  if (hostname === "localhost:5000") {
     url.pathname = `/home${url.pathname}`;
 
     return NextResponse.rewrite(url);
   }
 
-  const currentHost = hostname.replace(".localhost:3000", "");
-  url.pathname = `/$apps/${currentHost}${url.pathname}`;
+  const currentHost = hostname.replace(".localhost:5000", "");
+  url.pathname = `/$blog/${currentHost}${url.pathname}`;
   return NextResponse.rewrite(url);
 }
